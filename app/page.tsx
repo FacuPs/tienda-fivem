@@ -15,6 +15,18 @@ const vehiculos = [
     descripcionCorta: "Tuning completo, handling realista y texturas 4K exclusivas.",
     descripcionLarga: "El Volkswagen Golf 7.5R de 2018 es la combinación perfecta entre rendimiento deportivo y versatilidad diaria. Importado directamente a Los Santos, este vehículo cuenta con tracción en las cuatro ruedas (AWD), permitiendo arranques perfectos y un agarre en curvas a altas velocidades que te dará la ventaja en cualquier persecución.\n\nCuenta con interiores detallados, tablero funcional y cientos de modificaciones disponibles en Los Santos Customs.",
     linkMercadoPago: "https://mpago.la/11AGSRA" // PON AQUÍ TU LINK DE MERCADO PAGO
+  },{
+    id: "golfgti",
+    nombre: "Volkswagen Golf GTI MK7 2015",
+    categoria: "Hot Hatch",
+    precio: 5000,
+    moneda: "ARS",
+    imagenPrincipal: "/golfgti.png",
+    // Lista de fotos para la galería en la ventana grande
+    imagenesExtra: ["/golfgti.png", "/golfgti2.png", "/golfgti3.png", "/golfgti4.png"],
+    descripcionCorta: "El rey de las calles. Motor turbo, agilidad extrema y múltiples opciones de tuning.",
+    descripcionLarga: "El Volkswagen Golf GTI MK7 2015 es el rey indiscutible de los hatchback deportivos. Con su icónico motor turboalimentado, ofrece una aceleración explosiva y un manejo preciso en curvas estrechas, ideal tanto para exhibiciones como para escapes a alta velocidad por la ciudad.\n\nEste modelo incluye un kit de tuning súper completo disponible en Los Santos Customs: reprogramación de motor (Stage 1/2/3), escapes deportivos, alerones agresivos, faldones, y llantas exclusivas para exprimir cada caballo de fuerza. Siente la verdadera adrenalina alemana.",
+    linkMercadoPago: "https://mpago.la/13naoJy" // PON AQUÍ TU LINK DE MERCADO PAGO DEL GTI MK7
   }
 ];
 
