@@ -7,7 +7,7 @@ const vehiculos = [
     id: "golf",
     nombre: "Volkswagen Golf 7.5R 2018",
     categoria: "Hatchback Deportivo",
-    precio: 7000,
+    precio: 1,
     moneda: "ARS",
     imagenPrincipal: "/golf.png",
     imagenesExtra: ["/golf.png", "/golf2.png", "/golf3.png", "/golf4.png"],
