@@ -13,7 +13,7 @@ const vehiculos = [
     imagenesExtra: ["/golf.png", "/golf2.png", "/golf3.png", "/golf4.png"],
     descripcionCorta: "Tracción integral AWD, Stage 2 y sonido personalizado.",
     descripcionLarga: "El 7.5R es la joya de la corona. En Patagonia RP, este vehículo ha sido ajustado para ofrecer un manejo técnico y veloz. \n\nIncluye: \n• Entrega inmediata en tu garaje.\n• Kit de tuning 'R-Performance'.\n• Sonido de escape personalizado pop-and-bang.\n• Interior 4K con tablero funcional.",
-    linkCompra: "https://patagonia-store.tebex.io/package/7516772" 
+    linkCompra: "https://mpago.la/11AGSRA" 
   },
   {
     id: "golfgti",
@@ -171,9 +171,14 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <a href={autoSeleccionado.linkCompra} target="_blank" rel="noreferrer" className="block text-center bg-white text-black py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:bg-cyan-500 transition-all hover:scale-[1.02] active:scale-95 shadow-xl">
-                  Iniciar Adquisición
-                </a>
+                <a 
+  href={autoSeleccionado.linkCompra} 
+  target="_blank" 
+  rel="noreferrer" 
+  className="block text-center bg-[#009EE3] text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] hover:bg-[#008ACB] transition-all hover:scale-[1.02] shadow-xl shadow-blue-500/20"
+>
+  Pagar con Mercado Pago
+</a>
               </div>
             </div>
           </div>
