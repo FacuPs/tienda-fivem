@@ -7,14 +7,14 @@ const vehiculos = [
     id: "golf",
     nombre: "Volkswagen Golf 7.5R 2018",
     categoria: "Hatchback Deportivo",
-    precio: 2500,
+    precio: 7000,
     moneda: "ARS",
     imagenPrincipal: "/golf.png",
     // Lista de fotos para la galería en la ventana grande
     imagenesExtra: ["/golf.png", "/golf2.png", "/golf3.png", "/golf4.png"],
     descripcionCorta: "Tuning completo, handling realista y texturas 4K exclusivas.",
     descripcionLarga: "El Volkswagen Golf 7.5R de 2018 es la combinación perfecta entre rendimiento deportivo y versatilidad diaria. Importado directamente a Los Santos, este vehículo cuenta con tracción en las cuatro ruedas (AWD), permitiendo arranques perfectos y un agarre en curvas a altas velocidades que te dará la ventaja en cualquier persecución.\n\nCuenta con interiores detallados, tablero funcional y cientos de modificaciones disponibles en Los Santos Customs.",
-    linkMercadoPago: "#" // PON AQUÍ TU LINK DE MERCADO PAGO
+    linkMercadoPago: "https://mpago.la/11AGSRA" // PON AQUÍ TU LINK DE MERCADO PAGO
   }
 ];
 
