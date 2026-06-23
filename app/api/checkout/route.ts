@@ -15,18 +15,16 @@ export async function POST(request: Request) {
           currency_id: "ARS",
         }
       ],
-      // AQUÍ LE DECIMOS A MERCADO PAGO QUE VUELVA A TU PÁGINA DE ÉXITO
       back_urls: {
         success: "https://patagonia-store.vercel.app/exito",
         failure: "https://patagonia-store.vercel.app/",
         pending: "https://patagonia-store.vercel.app/"
       },
-      // ESTO HACE QUE LA REDIRECCIÓN SEA AUTOMÁTICA
       auto_return: "approved",
-      
-      // AQUÍ LE DECIMOS QUE AVISE A TU WEBHOOK CUANDO ALGUIEN PAGUE
       notification_url: "https://patagonia-store.vercel.app/api/mercadopago" 
     };
+
+    console.log("Intentando crear preferencia con token:", process.env.MP_ACCESS_TOKEN?.substring(0,10) + "...");
 
     const response = await fetch("https://api.mercadopago.com/checkout/preferences", {
       method: "POST",
@@ -39,10 +37,15 @@ export async function POST(request: Request) {
 
     const data = await response.json();
 
-    // Devolvemos el link de pago generado
+    if (!response.ok) {
+      console.error("Error de Mercado Pago:", data);
+      return NextResponse.json({ error: data.message || "Error en MP" }, { status: response.status });
+    }
+
     return NextResponse.json({ url: data.init_point });
     
-  } catch (error) {
-    return NextResponse.json({ error: "Error al crear pago" }, { status: 500 });
+  } catch (error: any) {
+    console.error("Error interno en checkout:", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
