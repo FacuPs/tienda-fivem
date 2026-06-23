@@ -7,13 +7,12 @@ const vehiculos = [
     id: "golf",
     nombre: "Volkswagen Golf 7.5R 2018",
     categoria: "Hatchback Deportivo",
-    precio: 1,
+    precio: 1, // Precio de prueba
     moneda: "ARS",
     imagenPrincipal: "/golf.png",
     imagenesExtra: ["/golf.png", "/golf2.png", "/golf3.png", "/golf4.png"],
     descripcionCorta: "Tracción integral AWD, Stage 2 y sonido personalizado.",
-    descripcionLarga: "El 7.5R es la joya de la corona. En Patagonia RP, este vehículo ha sido ajustado para ofrecer un manejo técnico y veloz. \n\n• Entrega inmediata en tu garaje.\n• Kit de tuning 'R-Performance'.\n• Sonido de escape personalizado pop-and-bang.\n• Interior 4K con tablero funcional.",
-    linkCompra: "https://mpago.la/11AGSRA" 
+    descripcionLarga: "El 7.5R es la joya de la corona. En Patagonia RP, este vehículo ha sido ajustado para ofrecer un manejo técnico y veloz. \n\n• Entrega inmediata en tu garaje.\n• Kit de tuning 'R-Performance'.\n• Sonido de escape personalizado pop-and-bang.\n• Interior 4K con tablero funcional."
   },
   {
     id: "golfgti",
@@ -24,18 +23,50 @@ const vehiculos = [
     imagenPrincipal: "/golfgti.png",
     imagenesExtra: ["/golfgti.png", "/golfgti2.png", "/golfgti3.png", "/golfgti4.png"],
     descripcionCorta: "Tracción delantera ágil, ideal para ciudad.",
-    descripcionLarga: "El clásico GTI MK7. Un vehículo equilibrado, con una aceleración envidiable y una estética impecable. \n\n• Entrega automática mediante sistema Tebex.\n• Múltiples opciones de llantas y alerones.\n• Handling optimizado.\n• Luces diurnas LED funcionales.",
-    linkCompra: "https://mpago.la/13naoJy"
+    descripcionLarga: "El clásico GTI MK7. Un vehículo equilibrado, con una aceleración envidiable y una estética impecable. \n\n• Entrega automática mediante sistema Tebex.\n• Múltiples opciones de llantas y alerones.\n• Handling optimizado.\n• Luces diurnas LED funcionales."
   }
 ];
 
 export default function Home() {
   const [autoSeleccionado, setAutoSeleccionado] = useState<any>(null);
   const [imagenActiva, setImagenActiva] = useState(0);
+  const [cargandoPago, setCargandoPago] = useState(false); // <--- NUEVO: Para saber si está cargando
 
   const abrirModal = (auto: any) => {
     setAutoSeleccionado(auto);
     setImagenActiva(0);
+  };
+
+  // <--- NUEVO: FUNCIÓN QUE HABLA CON TU API CHECKOUT --->
+  const pagarConMercadoPago = async (auto: any) => {
+    setCargandoPago(true);
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: auto.id,
+          nombre: auto.nombre,
+          precio: auto.precio
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.url) {
+        // Redirige al usuario al link de pago generado
+        window.location.href = data.url;
+      } else {
+        alert("Error al generar el pago. Intenta de nuevo.");
+        setCargandoPago(false);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error de conexión.");
+      setCargandoPago(false);
+    }
   };
 
   return (
@@ -106,7 +137,7 @@ export default function Home() {
           
           <div className="relative w-full max-w-5xl bg-[#0a0f18] rounded-[30px] md:rounded-[40px] border border-white/10 shadow-2xl overflow-hidden flex flex-col md:flex-row z-10 max-h-[90vh]">
             
-            {/* GALERÍA (Se adapta a móvil) */}
+            {/* GALERÍA */}
             <div className="w-full md:w-3/5 bg-black relative flex flex-col h-48 md:h-auto">
               <img src={autoSeleccionado.imagenesExtra[imagenActiva]} alt="Preview" className="w-full h-full object-cover" />
               <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 px-4 z-20">
@@ -116,11 +147,10 @@ export default function Home() {
                   </button>
                 ))}
               </div>
-              {/* Botón cerrar para móvil */}
               <button onClick={() => setAutoSeleccionado(null)} className="md:hidden absolute top-3 right-3 bg-black/60 text-white w-8 h-8 rounded-full z-30">×</button>
             </div>
 
-            {/* INFO (Con scroll independiente para que el botón no se pierda) */}
+            {/* INFO */}
             <div className="w-full md:w-2/5 p-6 md:p-10 flex flex-col h-full overflow-hidden">
               <button onClick={() => setAutoSeleccionado(null)} className="hidden md:block self-end mb-4 text-gray-500 hover:text-white transition-colors uppercase text-[10px] font-black tracking-widest">
                 Cerrar ×
@@ -134,7 +164,7 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* ACCIÓN (ESTO QUEDA FIJO ABAJO) */}
+              {/* ACCIÓN (BOTÓN MODIFICADO) */}
               <div className="mt-4 pt-4 border-t border-white/5 bg-[#0a0f18]">
                 <div className="flex justify-between items-end mb-4">
                   <div>
@@ -143,14 +173,13 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <a 
-                  href={autoSeleccionado.linkCompra} 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="block text-center bg-[#009EE3] text-white py-4 rounded-xl font-black text-xs uppercase tracking-[0.2em] hover:bg-[#008ACB] transition-all hover:scale-[1.02] shadow-xl shadow-blue-500/20 active:scale-95"
+                <button 
+                  onClick={() => pagarConMercadoPago(autoSeleccionado)}
+                  disabled={cargandoPago}
+                  className="w-full block text-center bg-[#009EE3] text-white py-4 rounded-xl font-black text-xs uppercase tracking-[0.2em] hover:bg-[#008ACB] transition-all hover:scale-[1.02] shadow-xl shadow-blue-500/20 active:scale-95 disabled:opacity-50 disabled:cursor-wait"
                 >
-                  Pagar con Mercado Pago
-                </a>
+                  {cargandoPago ? "Generando pago..." : "Pagar con Mercado Pago"}
+                </button>
               </div>
             </div>
           </div>

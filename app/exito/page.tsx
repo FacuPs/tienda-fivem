@@ -1,39 +1,55 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
+import { useSearchParams } from 'next/navigation';
 
-// Conectamos con Supabase (Esto corre del lado del cliente)
 const supabase = createClient(
   "https://exqefyunyaoclcekgiyj.supabase.co", 
-  "sb_publishable_7IOxIKBcWMy7B8-PTTvcxQ_KD5wt-A8O_6E3F4E5G6H7" // Usa tu PUBLIC ANON KEY aquí (la que dice anon public en Supabase)
+  "sb_publishable_7IOxIKBcWMy7B8-PTTvcxQ_KD5wt-A8O_6E3F4E5G6H7" 
 );
 
-export default function Exito() {
+function PaginaExito() {
+  const searchParams = useSearchParams();
+  const payment_id = searchParams.get("payment_id"); // MP nos manda esto en el link al volver
+
   const [codigo, setCodigo] = useState<string | null>(null);
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
     async function obtenerCodigo() {
-      // Buscamos el último código 'pendiente' creado hace menos de 1 minuto
-      const { data, error } = await supabase
-        .from("codigos")
-        .select("codigo")
-        .eq("estado", "pendiente")
-        .order("created_at", { ascending: false })
-        .limit(1);
+      if (payment_id) {
+        // Buscamos el código exacto de ESTE pago
+        const { data } = await supabase
+          .from("codigos")
+          .select("codigo")
+          .eq("payment_id", payment_id)
+          .single();
 
-      if (data && data.length > 0) {
-        setCodigo(data[0].codigo);
+        if (data) {
+          setCodigo(data.codigo);
+        }
+      } else {
+        // Si por alguna razón no hay link, buscamos el último como plan B
+        const { data } = await supabase
+          .from("codigos")
+          .select("codigo")
+          .eq("estado", "pendiente")
+          .order("created_at", { ascending: false })
+          .limit(1);
+
+        if (data && data.length > 0) {
+          setCodigo(data[0].codigo);
+        }
       }
       setCargando(false);
     }
 
     obtenerCodigo();
-    // Reintentar cada 3 segundos por si el webhook tarda
+    // Reintentar cada 3 segundos por si el webhook tardó 1 o 2 segundos más
     const interval = setInterval(obtenerCodigo, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [payment_id]);
 
   return (
     <div className="min-h-screen bg-[#05070a] text-white flex items-center justify-center p-6">
@@ -59,5 +75,14 @@ export default function Exito() {
         </Link>
       </div>
     </div>
+  );
+}
+
+// Next.js requiere envolver "useSearchParams" en un Suspense
+export default function Exito() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#05070a] flex items-center justify-center"><p className="text-cyan-400 animate-pulse">Cargando...</p></div>}>
+      <PaginaExito />
+    </Suspense>
   );
 }
