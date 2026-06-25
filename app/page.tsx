@@ -7,7 +7,7 @@ const vehiculos = [
     id: "golf",
     nombre: "Volkswagen Golf 7.5R 2018",
     categoria: "Hatchback Deportivo",
-    precio: 1, // Precio de prueba
+    precio: 7000, // Precio de prueba
     moneda: "ARS",
     imagenPrincipal: "/golf.png",
     imagenesExtra: ["/golf.png", "/golf2.png", "/golf3.png", "/golf4.png"],
@@ -25,6 +25,20 @@ const vehiculos = [
     descripcionCorta: "Tracción delantera ágil, ideal para ciudad.",
     descripcionLarga: "El clásico GTI MK7. Un vehículo equilibrado, con una aceleración envidiable y una estética impecable. \n\n• Entrega automática mediante sistema Tebex.\n• Múltiples opciones de llantas y alerones.\n• Handling optimizado.\n• Luces diurnas LED funcionales."
   }
+
+  {
+    id: "fiatuno",
+    nombre: "Fiat Uno Turbo i.e.",
+    categoria: "Clásico / Picadas",
+    precio: 7500,
+    moneda: "ARS",
+    imagenPrincipal: "/fiatuno.png",
+    imagenesExtra: ["/fiatuno.png", "/fiatuno2.png", "/fiatuno3.png", "/fiatuno4.png"],
+    descripcionCorta: "Pequeño, rabioso y legendario. El rey de las calles argentinas.",
+    descripcionLarga: "El Fiat Uno Turbo es una leyenda indiscutible. Liviano como una pluma, pero con un motor que lo convierte en un misil absoluto en los 400 metros.\n\n• Ideal para picadas y huidas por callejones estrechos.\n• Relación peso/potencia inigualable.\n• Sonido de válvula de alivio (blow-off) clásico.\n• Personalización de motor y estética extrema.",
+    linkCompra: "https://mpago.la/1yT3PQa" // <-- ACORDATE DE PONER TU LINK DE 15.000 ACÁ
+  }
+
 ];
 
 export default function Home() {

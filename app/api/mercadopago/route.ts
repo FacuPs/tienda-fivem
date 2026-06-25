@@ -35,6 +35,12 @@ export async function POST(request: Request) {
             modeloComprado = 'golfgti';
             prefijoCodigo = 'GTIMK7';
         }
+
+        else if (descripcionPago.includes('fiat') || descripcionPago.includes('uno')) {
+            modeloComprado = 'tmfiatunot'; // ⚠️ OJO: Cambiá 'fiatuno' por el nombre real de spawn que tenga el auto en tu servidor
+            prefijoCodigo = 'FIAT';
+          
+         }   
         // 👉 ACÁ PODÉS AGREGAR TUS FUTUROS AUTOS ASÍ:
         // else if (descripcionPago.includes('bmw')) {
         //     modeloComprado = 'bmwm4';
