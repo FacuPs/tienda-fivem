@@ -31,7 +31,7 @@ const vehiculos = [
     id: "fiatuno",
     nombre: "Fiat Uno Turbo i.e.",
     categoria: "Clásico / Picadas",
-    precio: 1,
+    precio: 5000,
     moneda: "ARS",
     imagenPrincipal: "/fiatuno.png",
     imagenesExtra: ["/fiatuno.png", "/fiatuno2.png", "/fiatuno3.png", "/fiatuno4.png"],
