@@ -1,88 +1,84 @@
 "use client";
-import { useEffect, useState, Suspense } from "react";
-import { createClient } from "@supabase/supabase-js";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from 'next/navigation';
 
-const supabase = createClient(
-  "https://exqefyunyaoclcekgiyj.supabase.co", 
-  "sb_publishable_7IOxIKBcWMy7B8-PTTvcxQ_KD5wt-A8O_6E3F4E5G6H7" 
-);
-
-function PaginaExito() {
-  const searchParams = useSearchParams();
-  const payment_id = searchParams.get("payment_id"); // MP nos manda esto en el link al volver
-
+export default function Exito() {
   const [codigo, setCodigo] = useState<string | null>(null);
   const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
-    async function obtenerCodigo() {
-      if (payment_id) {
-        // Buscamos el código exacto de ESTE pago
-        const { data } = await supabase
-          .from("codigos")
-          .select("codigo")
-          .eq("payment_id", payment_id)
-          .single();
+    let intentos = 0;
+    const maxIntentos = 15; // Va a intentar por 45 segundos máximo
 
-        if (data) {
+    const buscarCodigo = async () => {
+      try {
+        const res = await fetch('/api/ultimo-codigo', { cache: 'no-store' });
+        const data = await res.json();
+        
+        if (data.found && data.codigo) {
           setCodigo(data.codigo);
+          setCargando(false);
+        } else {
+          intentos++;
+          if (intentos >= maxIntentos) {
+            setCargando(false); // Se rinde si Mercado Pago tardó demasiado
+          }
         }
-      } else {
-        // Si por alguna razón no hay link, buscamos el último como plan B
-        const { data } = await supabase
-          .from("codigos")
-          .select("codigo")
-          .eq("estado", "pendiente")
-          .order("created_at", { ascending: false })
-          .limit(1);
-
-        if (data && data.length > 0) {
-          setCodigo(data[0].codigo);
-        }
+      } catch (e) {
+        console.error(e);
       }
-      setCargando(false);
-    }
+    };
 
-    obtenerCodigo();
-    // Reintentar cada 3 segundos por si el webhook tardó 1 o 2 segundos más
-    const interval = setInterval(obtenerCodigo, 3000);
-    return () => clearInterval(interval);
-  }, [payment_id]);
+    // Buscamos apenas carga
+    buscarCodigo();
+    
+    // Si no lo encuentra, sigue buscando cada 3 segundos
+    const intervalo = setInterval(() => {
+      if (!codigo && cargando) {
+        buscarCodigo();
+      }
+    }, 3000);
+
+    return () => clearInterval(intervalo);
+  }, [codigo, cargando]);
 
   return (
-    <div className="min-h-screen bg-[#05070a] text-white flex items-center justify-center p-6">
-      <div className="max-w-xl w-full bg-[#0a0f18] border border-cyan-500/30 rounded-[40px] p-10 text-center shadow-2xl">
-        <h1 className="text-3xl font-black italic mb-4">¡PAGO EXITOSO!</h1>
+    <div className="min-h-screen bg-[#05070a] text-white flex items-center justify-center p-6 font-sans selection:bg-cyan-500">
+      <div className="max-w-xl w-full bg-[#0a0f18] border border-cyan-500/20 rounded-[30px] p-10 text-center shadow-2xl relative overflow-hidden">
+        
+        {/* Luces de fondo */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-cyan-500/10 blur-[80px] -z-10"></div>
+        
+        <h1 className="text-3xl md:text-4xl font-black italic mb-4 uppercase tracking-tighter">¡Pago Exitoso!</h1>
         
         {cargando ? (
-          <p className="text-cyan-400 animate-pulse uppercase tracking-widest text-xs">Generando tu código de entrega...</p>
+          <div className="flex flex-col items-center gap-6 my-10">
+            <div className="w-14 h-14 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin"></div>
+            <p className="text-cyan-400 animate-pulse uppercase tracking-widest text-xs font-bold">Generando tu código en el servidor...</p>
+            <p className="text-gray-500 text-[10px] uppercase">Esperando confirmación de Mercado Pago</p>
+          </div>
         ) : codigo ? (
-          <>
-            <p className="text-gray-400 mb-6 italic">Copia este código y úsalo en el servidor:</p>
-            <div className="bg-black/50 border-2 border-dashed border-cyan-500/50 p-6 rounded-2xl mb-8">
-              <code className="text-3xl font-black text-cyan-400 tracking-wider">/claim {codigo}</code>
+          <div className="my-10">
+            <p className="text-gray-400 mb-6 font-medium">Copia este código y úsalo en el chat de la ciudad:</p>
+            <div className="bg-black/50 border border-cyan-500/50 p-6 rounded-2xl relative shadow-[0_0_30px_rgba(0,229,255,0.1)]">
+              <code className="text-3xl md:text-4xl font-black text-cyan-400 tracking-wider block">{codigo}</code>
             </div>
-            <p className="text-[10px] text-gray-500 uppercase mb-8">Toma captura de pantalla de este código</p>
-          </>
+            <div className="mt-6 inline-block bg-cyan-500/10 border border-cyan-500/30 px-4 py-2 rounded-lg">
+               <p className="text-sm text-gray-300">Comando: <strong className="text-white">/claim {codigo}</strong></p>
+            </div>
+            <p className="text-[10px] text-gray-500 uppercase mt-8 font-bold tracking-widest">⚠️ Toma una captura a esta pantalla por seguridad</p>
+          </div>
         ) : (
-          <p className="text-red-400 mb-8">Estamos procesando tu pago. Si el código no aparece en 1 minuto, abre un ticket en Discord.</p>
+          <div className="my-10 bg-red-500/10 border border-red-500/30 p-6 rounded-2xl">
+            <p className="text-red-400 font-bold mb-2">Demora en la red de cobros</p>
+            <p className="text-sm text-gray-400">Tu pago se hizo correctamente, pero Mercado Pago está tardando en avisarle al servidor. Por favor, abre un ticket en Discord enviando tu comprobante de pago para que te demos el código manualmente.</p>
+          </div>
         )}
 
-        <Link href="/" className="inline-block bg-white text-black px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-cyan-500 transition-all">
+        <Link href="/" className="inline-block w-full bg-white text-black px-8 py-4 rounded-xl font-black text-xs uppercase tracking-[0.15em] hover:bg-cyan-500 transition-all shadow-xl hover:scale-[1.02]">
           Volver a la tienda
         </Link>
       </div>
     </div>
-  );
-}
-
-// Next.js requiere envolver "useSearchParams" en un Suspense
-export default function Exito() {
-  return (
-    <Suspense fallback={<div className="min-h-screen bg-[#05070a] flex items-center justify-center"><p className="text-cyan-400 animate-pulse">Cargando...</p></div>}>
-      <PaginaExito />
-    </Suspense>
   );
 }
