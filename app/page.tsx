@@ -7,7 +7,7 @@ const vehiculos = [
     id: "golf",
     nombre: "Volkswagen Golf 7.5R 2018",
     categoria: "Hatchback Deportivo",
-    precio: 7000, // Precio de prueba
+    precio: 3.000, // Precio de prueba
     moneda: "ARS",
     imagenPrincipal: "/golf.png",
     imagenesExtra: ["/golf.png", "/golf2.png", "/golf3.png", "/golf4.png"],
@@ -18,19 +18,19 @@ const vehiculos = [
     id: "golfgti",
     nombre: "Volkswagen Golf GTI MK7 2015",
     categoria: "Hot Hatch",
-    precio: 5000,
+    precio: 2.500,
     moneda: "ARS",
     imagenPrincipal: "/golfgti.png",
     imagenesExtra: ["/golfgti.png", "/golfgti2.png", "/golfgti3.png", "/golfgti4.png"],
     descripcionCorta: "Tracción delantera ágil, ideal para ciudad.",
     descripcionLarga: "El clásico GTI MK7. Un vehículo equilibrado, con una aceleración envidiable y una estética impecable. \n\n• Entrega automática mediante sistema Tebex.\n• Múltiples opciones de llantas y alerones.\n• Handling optimizado.\n• Luces diurnas LED funcionales."
-  }
+  },
 
   {
     id: "fiatuno",
     nombre: "Fiat Uno Turbo i.e.",
     categoria: "Clásico / Picadas",
-    precio: 7500,
+    precio: 5.000,
     moneda: "ARS",
     imagenPrincipal: "/fiatuno.png",
     imagenesExtra: ["/fiatuno.png", "/fiatuno2.png", "/fiatuno3.png", "/fiatuno4.png"],
