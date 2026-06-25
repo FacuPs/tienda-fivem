@@ -6,22 +6,10 @@ import { useState } from "react";
 // ==========================================
 const vehiculos = [
   {
-    id: "golf",
-    nombre: "Volkswagen Golf 7.5R 2018",
-    categoria: "Hatchback Deportivo",
-    precio: 7000,
-    moneda: "ARS",
-    imagenPrincipal: "/golf.png",
-    imagenesExtra: ["/golf.png", "/golf2.png", "/golf3.png", "/golf4.png"],
-    descripcionCorta: "Tracción integral AWD, Stage 2 y sonido personalizado.",
-    descripcionLarga: "El 7.5R es la joya de la corona. En Patagonia RP, este vehículo ha sido ajustado para ofrecer un manejo técnico y veloz.\n\n• Entrega automática en el juego.\n• Kit de tuning 'R-Performance'.\n• Sonido de escape personalizado.\n• Interior 4K con tablero funcional.",
-    linkCompra: "https://mpago.la/11AGSRA" 
-  },
-  {
     id: "golfgti",
     nombre: "Volkswagen Golf GTI MK7 2015",
     categoria: "Hot Hatch",
-    precio: 5000,
+    precio: 2500,
     moneda: "ARS",
     imagenPrincipal: "/golfgti.png",
     imagenesExtra: ["/golfgti.png", "/golfgti2.png", "/golfgti3.png", "/golfgti4.png"],
@@ -29,11 +17,26 @@ const vehiculos = [
     descripcionLarga: "El clásico GTI MK7. Un vehículo equilibrado, con una aceleración envidiable y una estética impecable.\n\n• Entrega automática mediante Webhook.\n• Múltiples opciones de llantas y alerones.\n• Handling optimizado.\n• Luces diurnas LED funcionales.",
     linkCompra: "https://mpago.la/13naoJy"
   },
+  
+  
+  {
+    id: "golf",
+    nombre: "Volkswagen Golf 7.5R 2018",
+    categoria: "Hatchback Deportivo",
+    precio: 3000,
+    moneda: "ARS",
+    imagenPrincipal: "/golf.png",
+    imagenesExtra: ["/golf.png", "/golf2.png", "/golf3.png", "/golf4.png"],
+    descripcionCorta: "Tracción integral AWD, Stage 2 y sonido personalizado.",
+    descripcionLarga: "El 7.5R es la joya de la corona. En Patagonia RP, este vehículo ha sido ajustado para ofrecer un manejo técnico y veloz.\n\n• Entrega automática en el juego.\n• Kit de tuning 'R-Performance'.\n• Sonido de escape personalizado.\n• Interior 4K con tablero funcional.",
+    linkCompra: "https://mpago.la/11AGSRA" 
+  },
+  
   {
     id: "fiatuno",
     nombre: "Fiat Uno Turbo i.e.",
     categoria: "Clásico / Picadas",
-    precio: 7500,
+    precio: 4500,
     moneda: "ARS",
     imagenPrincipal: "/fiatuno.png",
     imagenesExtra: ["/fiatuno.png", "/fiatuno2.png", "/fiatuno3.png", "/fiatuno4.png"],
