@@ -4,33 +4,34 @@ import { useState } from "react";
 // CONFIGURACIÓN DE TUS VEHÍCULOS
 const vehiculos = [
   {
-    id: "golf",
-    nombre: "Volkswagen Golf 7.5R 2018",
-    categoria: "Hatchback Deportivo",
-    precio: 3.000, // Precio de prueba
-    moneda: "ARS",
-    imagenPrincipal: "/golf.png",
-    imagenesExtra: ["/golf.png", "/golf2.png", "/golf3.png", "/golf4.png"],
-    descripcionCorta: "Tracción integral AWD, Stage 2 y sonido personalizado.",
-    descripcionLarga: "El 7.5R es la joya de la corona. En Patagonia RP, este vehículo ha sido ajustado para ofrecer un manejo técnico y veloz. \n\n• Entrega inmediata en tu garaje.\n• Kit de tuning 'R-Performance'.\n• Sonido de escape personalizado pop-and-bang.\n• Interior 4K con tablero funcional."
-  },
-  {
     id: "golfgti",
     nombre: "Volkswagen Golf GTI MK7 2015",
     categoria: "Hot Hatch",
-    precio: 2.500,
+    precio: 2500,
     moneda: "ARS",
     imagenPrincipal: "/golfgti.png",
     imagenesExtra: ["/golfgti.png", "/golfgti2.png", "/golfgti3.png", "/golfgti4.png"],
     descripcionCorta: "Tracción delantera ágil, ideal para ciudad.",
     descripcionLarga: "El clásico GTI MK7. Un vehículo equilibrado, con una aceleración envidiable y una estética impecable. \n\n• Entrega automática mediante sistema Tebex.\n• Múltiples opciones de llantas y alerones.\n• Handling optimizado.\n• Luces diurnas LED funcionales."
   },
+  
+  {
+    id: "golf",
+    nombre: "Volkswagen Golf 7.5R 2018",
+    categoria: "Hatchback Deportivo",
+    precio: 3000, // Precio de prueba
+    moneda: "ARS",
+    imagenPrincipal: "/golf.png",
+    imagenesExtra: ["/golf.png", "/golf2.png", "/golf3.png", "/golf4.png"],
+    descripcionCorta: "Tracción integral AWD, Stage 2 y sonido personalizado.",
+    descripcionLarga: "El 7.5R es la joya de la corona. En Patagonia RP, este vehículo ha sido ajustado para ofrecer un manejo técnico y veloz. \n\n• Entrega inmediata en tu garaje.\n• Kit de tuning 'R-Performance'.\n• Sonido de escape personalizado pop-and-bang.\n• Interior 4K con tablero funcional."
+  },
 
   {
     id: "fiatuno",
     nombre: "Fiat Uno Turbo i.e.",
     categoria: "Clásico / Picadas",
-    precio: 5.000,
+    precio: 5000,
     moneda: "ARS",
     imagenPrincipal: "/fiatuno.png",
     imagenesExtra: ["/fiatuno.png", "/fiatuno2.png", "/fiatuno3.png", "/fiatuno4.png"],
