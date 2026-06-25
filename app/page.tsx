@@ -39,7 +39,7 @@ const vehiculos = [
     imagenesExtra: ["/fiatuno.png", "/fiatuno2.png", "/fiatuno3.png", "/fiatuno4.png"],
     descripcionCorta: "Pequeño, rabioso y legendario. El rey de las calles argentinas.",
     descripcionLarga: "El Fiat Uno Turbo es una leyenda indiscutible. Liviano como una pluma, pero con un motor que lo convierte en un misil absoluto en los 400 metros.\n\n• Ideal para picadas y huidas estrechas.\n• Relación peso/potencia inigualable.\n• Sonido de válvula de alivio clásico.\n• Personalización extrema en LS Customs.",
-    linkCompra: "ACA_VA_EL_LINK_DEL_FIAT" 
+    linkCompra: "https://mpago.la/1yT3PQa" 
   }
 ];
 
