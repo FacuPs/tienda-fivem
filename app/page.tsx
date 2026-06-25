@@ -39,40 +39,121 @@ const vehiculos = [
     imagenesExtra: ["/fiatuno.png", "/fiatuno2.png", "/fiatuno3.png", "/fiatuno4.png"],
     descripcionCorta: "Pequeño, rabioso y legendario. El rey de las calles argentinas.",
     descripcionLarga: "El Fiat Uno Turbo es una leyenda indiscutible. Liviano como una pluma, pero con un motor que lo convierte en un misil absoluto en los 400 metros.\n\n• Ideal para picadas y huidas estrechas.\n• Relación peso/potencia inigualable.\n• Sonido de válvula de alivio clásico.\n• Personalización extrema en LS Customs.",
-    linkCompra: "https://mpago.la/1yT3PQa" // <--- CAMBIÁ ESTO POR TU LINK REAL
+    linkCompra: "ACA_VA_EL_LINK_DEL_FIAT" 
   }
 ];
 
 // ==========================================
-// 📜 CONFIGURACIÓN DE NORMATIVAS
+// 📜 CONFIGURACIÓN DE NORMATIVAS (ESTILO SERIO)
 // ==========================================
-const normativas = [
-  {
-    id: 1,
-    titulo: "1. Conceptos Básicos de Roleplay",
-    texto: "• RDM (Random Deathmatch): Está totalmente prohibido agredir o matar a un jugador sin un rol previo válido.\n• VDM (Vehicle Deathmatch): No puedes utilizar un vehículo como arma para atropellar intencionalmente.\n• MG (MetaGaming): Prohibido usar información obtenida fuera del juego (Discord, Streams) dentro del rol.\n• PG (PowerGaming): Prohibido realizar acciones irreales (ej. correr después de recibir un disparo)."
+const normativasData: any = {
+  generales: {
+    titulo: "NORMATIVAS GENERALES",
+    introduccion: "Al ingresar a Patagonia RP, estás aceptando cumplir con este reglamento. El desconocimiento de la normativa no exime de su cumplimiento ni de la sanción correspondiente. Buscamos una experiencia de rol seria, inmersiva y respetuosa.",
+    secciones: [
+      {
+        subtitulo: "¿Qué es el Roleplay?",
+        texto: "El Roleplay consiste en la interpretación de un personaje ficticio en un entorno virtual. Tu personaje no eres tú; tiene sus propios miedos, aspiraciones, conocimientos y limitaciones. Toda acción debe ser coherente con la realidad."
+      },
+      {
+        subtitulo: "Infracciones Graves (Sanción Directa)",
+        texto: "• RDM (Random Deathmatch): Matar o agredir a un jugador sin una interacción de rol previa y válida.\n• VDM (Vehicle Deathmatch): Usar cualquier tipo de vehículo como arma para atropellar intencionalmente a otro jugador.\n• MetaGaming (MG): Utilizar información obtenida fuera de tu personaje (Discord, Twitch, otros chats) para beneficio dentro del juego.\n• PowerGaming (PG): Realizar acciones que serían imposibles en la vida real (ej. levantar un auto con las manos) o forzar el rol de otro jugador sin darle oportunidad de respuesta."
+      },
+      {
+        subtitulo: "Valoración de Vida (NVVL)",
+        texto: "Es la norma más importante. Debes valorar la vida de tu personaje por sobre todo. Si estás en clara desventaja (ej. dos personas te apuntan con armas de fuego mientras estás desarmado), DEBES rendirte. Escapar o sacar un arma en esa situación es considerado nula valoración y se castiga con BAN."
+      },
+      {
+        subtitulo: "Zonas Seguras",
+        texto: "Está prohibido iniciar actos delictivos (robos, secuestros, asesinatos) en las siguientes zonas:\n- Comisarías (Interior y estacionamiento).\n- Hospitales.\n- Talleres Mecánicos Oficiales.\n- Concesionarios y Garaje Central.\nNota: Si un rol agresivo inicia FUERA de una zona segura y la víctima huye hacia adentro, el rol PUEDE continuar, pero se debe avisar por reporte a la administración."
+      },
+      {
+        subtitulo: "Uso del Entorno",
+        texto: "La ciudad no está vacía. Debes simular que hay NPCs y cámaras de seguridad en zonas céntricas. Realizar un asesinato en la plaza central al mediodía debe rolearse asumiendo que la policía será llamada inmediatamente por los civiles del entorno."
+      }
+    ]
   },
-  {
-    id: 2,
-    titulo: "2. Valoración de Vida",
-    texto: "La vida de tu personaje es lo más importante. Ante una amenaza real (ej. si te apuntan con un arma 2 personas), debes rendirte y priorizar tu supervivencia. No valorar tu vida es motivo de sanción inmediata (Warn o Ban)."
+  policia: {
+    titulo: "NORMATIVAS POLICIALES (PFA/LSPD)",
+    introduccion: "Las Fuerzas de Seguridad son el pilar del orden en la ciudad. Se exige un nivel de rol ejemplar, seriedad absoluta en los procedimientos y respeto a la cadena de mando.",
+    secciones: [
+      {
+        subtitulo: "Directrices Generales",
+        texto: "Todo oficial en servicio debe actuar con profesionalismo. No se permiten insultos injustificados a los civiles ni el uso excesivo de fuerza. El objetivo principal es preservar la vida, tanto de civiles como de sospechosos."
+      },
+      {
+        subtitulo: "Uso de la Fuerza Letal",
+        texto: "Las armas de fuego solo podrán ser desenfundadas y utilizadas cuando la vida del oficial o de terceros corra peligro inminente. Para reducir a un sospechoso en fuga (desarmado), se debe usar el Taser o la fuerza física."
+      },
+      {
+        subtitulo: "Corrupción",
+        texto: "La corrupción policial de bajo nivel (aceptar pequeños sobornos por multas de tránsito) está permitida SIEMPRE Y CUANDO exista un rol sólido y no se vea involucrada la cúpula mayor. Sin embargo, vender armas del arsenal policial, chalecos o colaborar directamente en robos grandes conlleva a PK Total del personaje (Despido y cárcel)."
+      },
+      {
+        subtitulo: "Persecuciones",
+        texto: "El oficial líder de la persecución debe coordinar por radio. Está prohibido el PIT-Maneuver (chocar la parte trasera del auto fugitivo) a velocidades superiores a 120 km/h, salvo autorización explícita de un rango superior."
+      }
+    ]
   },
-  {
-    id: 3,
-    titulo: "3. Zonas Seguras",
-    texto: "Hospitales, Comisarías, Garaje Central, Concesionarios y Zonas de Trabajo inicial son consideradas ZONAS SEGURAS. Dentro de este radio no se puede robar, secuestrar, asesinar ni iniciar roles agresivos."
+  same: {
+    titulo: "NORMATIVAS S.A.M.E. (MÉDICOS)",
+    introduccion: "El personal de salud es neutral. Su única labor es salvar vidas sin importar el bando, la raza o los antecedentes del paciente.",
+    secciones: [
+      {
+        subtitulo: "Neutralidad y Respeto",
+        texto: "El SAME no puede ser atacado, secuestrado ni robado mientras se encuentre en servicio y con su uniforme, a menos que esté interfiriendo intencionalmente en un tiroteo activo. A su vez, los médicos no pueden portar armas de fuego."
+      },
+      {
+        subtitulo: "Prioridad de Reanimación",
+        texto: "Si en un operativo hay varios heridos, el médico debe priorizar por lógica de gravedad y cercanía. No puede reanimar a un compañero si hay policías indicando que la zona aún no es segura."
+      },
+      {
+        subtitulo: "Corrupción en Facción Médica",
+        texto: "Está ESTRICTAMENTE PROHIBIDA la corrupción dentro del SAME. No se pueden vender botiquines, vendas ni material médico de la facción a mafias o pandillas. Hacerlo conlleva Ban permanente de la facción."
+      }
+    ]
   },
-  {
-    id: 4,
-    titulo: "4. Uso del Entorno",
-    texto: "El entorno se debe respetar en todo momento. Aunque no veas NPCs, si estás en el centro de la ciudad a plena luz del día, se asume que hay testigos. La ciudad siempre está viva y debes rolear en consecuencia."
+  mecanicos: {
+    titulo: "NORMATIVAS MECÁNICOS (A.C.A)",
+    introduccion: "El Automóvil Club Argentino (o talleres asociados) es una facción legal responsable del mantenimiento vehicular de la ciudad.",
+    secciones: [
+      {
+        subtitulo: "Comportamiento en Servicio",
+        texto: "Al estar en servicio, el mecánico debe ofrecer buen trato a los clientes. Es obligatorio usar la ropa de trabajo proporcionada por el taller. No se pueden realizar actos delictivos (robar tiendas, peleas callejeras) estando de turno."
+      },
+      {
+        subtitulo: "Reparaciones y Tuneos",
+        texto: "El mecánico debe interpretar (mediante comandos /me y /do) la reparación del vehículo. No basta con simplemente apretar un botón del menú. Un tuneo completo de motor debe tener un rol mínimo de 5 minutos."
+      },
+      {
+        subtitulo: "Grúas e Incautaciones",
+        texto: "Solo se podrán remolcar vehículos que estén bloqueando la vía pública, estacionados en línea roja o por pedido exclusivo de las fuerzas policiales. El mecánico no tiene autoridad para multar."
+      }
+    ]
   },
-  {
-    id: 5,
-    titulo: "5. Uso del Micrófono",
-    texto: "El uso de micrófono es OBLIGATORIO. Debes mantener una calidad de audio decente. Está prohibido gritar saturando el micrófono intencionalmente, poner música por voz o hablar de temas fuera de rol (OOC) usando la voz del juego."
+  ilegales: {
+    titulo: "NORMATIVAS ILEGALES (MAFIAS Y BANDAS)",
+    introduccion: "La vida criminal en Patagonia RP debe llevarse a cabo con cabeza fría. Buscamos roles elaborados por sobre los tiroteos constantes.",
+    secciones: [
+      {
+        subtitulo: "Límites por Robo",
+        texto: "• Tiendas locales: Máximo 3 atracadores.\n• Joyería: Máximo 4 atracadores. Rehenes permitidos: 2.\n• Banco Fleeca (Chicos): Máximo 5 atracadores. Rehenes: 3.\n• Banco Central (Pacific): Máximo 8 atracadores. Rehenes: Ilimitados.\nSuperar estos límites anula el rol automáticamente."
+      },
+      {
+        subtitulo: "Secuestros y Robos a Jugadores",
+        texto: "Para secuestrar a un civil deben ser mínimo 2 personas armadas. Para secuestrar a un Policía o Médico, debe haber mínimo 4 Policías en servicio. No se puede obligar a un jugador a transferir dinero del banco o sacar vehículos de su garaje."
+      },
+      {
+        subtitulo: "Alianzas",
+        texto: "Está prohibido que dos bandas o mafias distintas se alíen para cometer un atraco grande o enfrentarse a la policía. Las alianzas solo sirven para comercio de drogas o armas, no para actividades bélicas."
+      },
+      {
+        subtitulo: "Tiroteos y Drive-by",
+        texto: "Disparar desde un vehículo en movimiento (Drive-by) solo está permitido si es entre vehículos. Está prohibido dar vueltas en auto acribillando a personas que van a pie (eso se considera abuso y DM)."
+      }
+    ]
   }
-];
+};
 
 
 // ==========================================
@@ -80,6 +161,7 @@ const normativas = [
 // ==========================================
 export default function Home() {
   const [seccionActiva, setSeccionActiva] = useState("inicio");
+  const [normativaActiva, setNormativaActiva] = useState("generales");
   const [menuAbierto, setMenuAbierto] = useState(false);
   
   // Estados de Tienda
@@ -106,10 +188,10 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#05070a] text-white font-sans selection:bg-cyan-500 selection:text-black">
+    <div className="min-h-screen bg-[#05070a] text-white font-sans selection:bg-cyan-500 selection:text-black flex flex-col">
       
       {/* ================= BARRA DE NAVEGACIÓN ================= */}
-      <header className="px-6 py-4 bg-[#05070a]/80 backdrop-blur-xl border-b border-cyan-500/10 flex justify-between items-center sticky top-0 z-40 shadow-2xl">
+      <header className="px-6 py-4 bg-[#080b12]/95 backdrop-blur-xl border-b border-white/5 flex justify-between items-center sticky top-0 z-40 shadow-2xl">
         <div className="flex items-center gap-3">
           <div className="bg-gradient-to-br from-cyan-500 to-blue-600 p-[1px] rounded-xl">
             <div className="bg-[#05070a] p-1.5 rounded-[11px]">
@@ -125,7 +207,7 @@ export default function Home() {
         <nav className="hidden md:flex gap-8 items-center font-black text-xs tracking-widest uppercase">
           <button onClick={() => cambiarSeccion("inicio")} className={`transition-all hover:text-cyan-400 ${seccionActiva === "inicio" ? "text-cyan-400" : "text-gray-400"}`}>Inicio</button>
           <button onClick={() => cambiarSeccion("normativas")} className={`transition-all hover:text-cyan-400 ${seccionActiva === "normativas" ? "text-cyan-400" : "text-gray-400"}`}>Normativas</button>
-          <button onClick={() => cambiarSeccion("tienda")} className={`bg-cyan-500 hover:bg-cyan-400 text-black px-6 py-2 rounded-full transition-transform hover:scale-105 shadow-[0_0_15px_rgba(0,229,255,0.3)] ${seccionActiva === "tienda" ? "scale-105 ring-2 ring-white/50" : ""}`}>
+          <button onClick={() => cambiarSeccion("tienda")} className={`bg-cyan-500 hover:bg-cyan-400 text-[#05070a] px-6 py-2.5 rounded-lg transition-transform hover:scale-105 shadow-[0_0_15px_rgba(0,229,255,0.2)] ${seccionActiva === "tienda" ? "ring-2 ring-white/30" : ""}`}>
             Tienda Vip
           </button>
         </nav>
@@ -146,7 +228,7 @@ export default function Home() {
       )}
 
       {/* ================= CONTENIDO DINÁMICO ================= */}
-      <main className="relative min-h-[80vh]">
+      <main className="relative flex-grow">
         {/* Luz de fondo global */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-600/10 blur-[150px] -z-10 rounded-full pointer-events-none"></div>
 
@@ -185,7 +267,7 @@ export default function Home() {
                 { i: "🚓", t: "Facciones Activas", d: "Postulate para LSPD, SAME o mecánicos. Creá tu mafia o pandilla y dominá los negocios ilegales." },
                 { i: "💰", t: "Economía Real", d: "Precios balanceados, trabajos variados y recompensas justas. El esfuerzo dentro del juego vale la pena." }
               ].map((card, i) => (
-                <div key={i} className="bg-[#0a0f18]/80 backdrop-blur-md border border-cyan-500/10 p-8 rounded-3xl hover:border-cyan-500/30 transition-all hover:-translate-y-1">
+                <div key={i} className="bg-[#0c1018]/60 backdrop-blur-xl border border-white/5 p-8 rounded-3xl hover:border-cyan-500/20 transition-all hover:-translate-y-1 shadow-lg">
                   <div className="text-4xl mb-4">{card.i}</div>
                   <h3 className="text-xl font-black mb-3 uppercase italic">{card.t}</h3>
                   <p className="text-gray-400 text-sm leading-relaxed">{card.d}</p>
@@ -195,23 +277,48 @@ export default function Home() {
           </div>
         )}
 
-        {/* ---------------- SECCIÓN 2: NORMATIVAS ---------------- */}
+        {/* ---------------- SECCIÓN 2: NORMATIVAS (ESTILO IBIZA) ---------------- */}
         {seccionActiva === "normativas" && (
-          <div className="container mx-auto px-4 py-16 animate-fade-in max-w-4xl">
-             <div className="text-center mb-16">
-               <h2 className="text-4xl md:text-6xl font-black tracking-tighter italic uppercase text-white">
-                   REGLAS DE LA <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">CIUDAD</span>
-               </h2>
-               <p className="text-gray-400 mt-4 font-medium uppercase tracking-widest text-xs">Lectura obligatoria para evitar sanciones</p>
-             </div>
+          <div className="container mx-auto px-4 py-12 animate-fade-in max-w-7xl flex flex-col md:flex-row gap-8">
+             
+             {/* Menú Lateral (Sidebar) */}
+             <aside className="w-full md:w-72 flex-shrink-0">
+               <div className="bg-[#0c1018]/80 backdrop-blur-xl border border-white/5 rounded-3xl p-4 sticky top-28 shadow-xl">
+                 <h3 className="text-xs font-black text-gray-500 uppercase tracking-widest mb-4 px-4">Secciones</h3>
+                 <div className="flex flex-col gap-2">
+                   {Object.keys(normativasData).map((clave) => (
+                     <button 
+                       key={clave} 
+                       onClick={() => setNormativaActiva(clave)}
+                       className={`flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-sm uppercase tracking-wide transition-all ${normativaActiva === clave ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20' : 'text-gray-400 hover:bg-white/5 hover:text-white border border-transparent'}`}
+                     >
+                       <svg className="w-4 h-4 opacity-70" fill="currentColor" viewBox="0 0 20 20"><path d="M14 2H6a2 2 0 0 0-2 2v16l6-3 6 3V4a2 2 0 0 0-2-2z"/></svg>
+                       {normativasData[clave].titulo.replace("NORMATIVAS ", "")}
+                     </button>
+                   ))}
+                 </div>
+               </div>
+             </aside>
 
-             <div className="space-y-6">
-                {normativas.map((regla) => (
-                  <div key={regla.id} className="bg-[#0a0f18]/60 backdrop-blur-md border border-white/5 p-6 md:p-8 rounded-3xl hover:border-cyan-500/30 transition-colors shadow-xl">
-                    <h3 className="text-xl md:text-2xl font-black text-cyan-400 mb-4 uppercase italic tracking-wide">{regla.titulo}</h3>
-                    <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-line font-medium">{regla.texto}</p>
-                  </div>
-                ))}
+             {/* Contenido Principal de Normativas */}
+             <div className="flex-1 bg-[#0c1018]/60 backdrop-blur-xl border border-white/5 rounded-3xl p-6 md:p-12 shadow-2xl">
+                <h2 className="text-3xl md:text-5xl font-black italic uppercase text-cyan-400 mb-6 tracking-tight">
+                  {normativasData[normativaActiva].titulo}
+                </h2>
+                <p className="text-gray-300 font-medium leading-relaxed mb-10 pb-10 border-b border-white/10">
+                  {normativasData[normativaActiva].introduccion}
+                </p>
+
+                <div className="space-y-12">
+                  {normativasData[normativaActiva].secciones.map((seccion: any, index: number) => (
+                    <div key={index} className="animate-fade-in">
+                      <h3 className="text-xl md:text-2xl font-black text-white mb-4 italic tracking-wide">{seccion.subtitulo}</h3>
+                      <p className="text-gray-400 text-sm leading-relaxed whitespace-pre-line">
+                        {seccion.texto}
+                      </p>
+                    </div>
+                  ))}
+                </div>
              </div>
           </div>
         )}
@@ -230,7 +337,7 @@ export default function Home() {
 
              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
                 {vehiculos.map((auto) => (
-                  <div key={auto.id} className="group bg-[#0a0f18] rounded-3xl overflow-hidden border border-white/5 hover:border-cyan-500/50 transition-all duration-300 shadow-xl cursor-pointer" onClick={() => abrirModal(auto)}>
+                  <div key={auto.id} className="group bg-[#0c1018]/80 backdrop-blur-md rounded-3xl overflow-hidden border border-white/5 hover:border-cyan-500/40 transition-all duration-300 shadow-xl cursor-pointer" onClick={() => abrirModal(auto)}>
                     <div className="relative h-56 md:h-64">
                       <img src={auto.imagenPrincipal} alt={auto.nombre} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                       <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg text-[10px] font-black text-cyan-400 uppercase tracking-widest border border-white/10">
@@ -239,13 +346,13 @@ export default function Home() {
                     </div>
                     <div className="p-6 md:p-8">
                       <h4 className="text-xl md:text-2xl font-black mb-2 italic uppercase group-hover:text-cyan-400 transition-colors line-clamp-1">{auto.nombre}</h4>
-                      <p className="text-xs text-gray-500 mb-6 line-clamp-2">{auto.descripcionCorta}</p>
+                      <p className="text-xs text-gray-500 mb-6 line-clamp-2 font-medium">{auto.descripcionCorta}</p>
                       <div className="flex justify-between items-end border-t border-white/5 pt-6">
                         <div>
                            <p className="text-[10px] font-bold text-gray-600 uppercase tracking-widest mb-1">Precio Final</p>
                            <span className="text-2xl font-black text-white">${auto.precio.toLocaleString()} <span className="text-[10px] text-gray-500">{auto.moneda}</span></span>
                         </div>
-                        <div className="bg-cyan-500 text-black p-3 rounded-xl group-hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all">
+                        <div className="bg-cyan-500 text-[#05070a] p-3 rounded-xl group-hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all">
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4.5v15m7.5-7.5h-15" /></svg>
                         </div>
                       </div>
@@ -260,10 +367,10 @@ export default function Home() {
       {/* ================= MODAL DE LA TIENDA ================= */}
       {autoSeleccionado && seccionActiva === "tienda" && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-2 md:p-6 animate-fade-in">
-          <div className="absolute inset-0 bg-black/90 backdrop-blur-md" onClick={() => setAutoSeleccionado(null)}></div>
+          <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={() => setAutoSeleccionado(null)}></div>
           
-          <div className="relative w-full max-w-5xl bg-[#0a0f18] rounded-3xl border border-white/10 shadow-2xl overflow-hidden flex flex-col md:flex-row z-10 max-h-[90vh]">
-            <button onClick={() => setAutoSeleccionado(null)} className="absolute top-4 right-4 z-[110] bg-black/60 text-white w-10 h-10 rounded-full text-xl hover:bg-cyan-500 hover:text-black transition-colors">×</button>
+          <div className="relative w-full max-w-5xl bg-[#0c1018] rounded-[30px] border border-white/10 shadow-2xl overflow-hidden flex flex-col md:flex-row z-10 max-h-[90vh]">
+            <button onClick={() => setAutoSeleccionado(null)} className="absolute top-4 right-4 z-[110] bg-black/60 border border-white/10 text-white w-10 h-10 rounded-full text-xl hover:bg-cyan-500 hover:text-black transition-all">×</button>
 
             <div className="w-full md:w-3/5 bg-black relative flex flex-col h-56 md:h-auto">
               <img src={autoSeleccionado.imagenesExtra[imagenActiva]} alt="Preview" className="w-full h-full object-cover" />
@@ -276,7 +383,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="w-full md:w-2/5 p-6 md:p-10 flex flex-col h-full overflow-hidden bg-gradient-to-b from-[#0a0f18] to-[#05070a]">
+            <div className="w-full md:w-2/5 p-6 md:p-10 flex flex-col h-full overflow-hidden bg-gradient-to-b from-[#0c1018] to-[#05070a]">
               <div className="flex-grow overflow-y-auto pr-2 custom-scrollbar">
                 <span className="text-cyan-500 text-[10px] font-black tracking-widest uppercase">{autoSeleccionado.categoria}</span>
                 <h3 className="text-2xl md:text-3xl font-black mt-2 mb-6 italic uppercase leading-none">{autoSeleccionado.nombre}</h3>
@@ -285,8 +392,8 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="mt-4 pt-4 border-t border-white/10 shrink-0">
-                <div className="mb-4">
+              <div className="mt-4 pt-4 border-t border-white/5 shrink-0">
+                <div className="mb-5">
                   <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Valor de Inversión</p>
                   <p className="text-3xl font-black">${autoSeleccionado.precio.toLocaleString()} <span className="text-xs text-gray-500">{autoSeleccionado.moneda}</span></p>
                 </div>
@@ -301,7 +408,7 @@ export default function Home() {
       )}
 
       {/* FOOTER */}
-      <footer className="relative z-10 py-10 text-center border-t border-white/5 mt-10">
+      <footer className="relative z-10 py-10 text-center border-t border-white/5 mt-auto bg-[#05070a]">
          <p className="text-[10px] font-black tracking-[0.5em] text-white/30 uppercase">Patagonia RP © {new Date().getFullYear()}</p>
       </footer>
 
